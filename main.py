@@ -78,62 +78,70 @@ def solAstar(maze, start, end):
     return maze, sol, weight
 
 
-
-print("-------------------------------------------------------------")
-print("\tWelcome to maze generation and solving game!")
-print("-------------------------------------------------------------")
-
-print("\nWhich algorithm would you like to use to generate the maze? :\n")
-
-print("1. Recursive Backtracking\n2. Sidewinder\n3. Recursive Division\n And Press any other key to exit \n")
-choice  = int(input("Please Choose: "))
+def main():
 
 
-dim = int(input("\n\nPlease Select the size of Maze (MIN: 11): "))
+    print("\nWhich algorithm would you like to use to generate the maze? :\n")
+
+    print("1. Recursive Backtracking\n2. Sidewinder\n3. Recursive Division\nAnd Press any other key to exit \n")
+    choice  = int(input("Please Choose: "))
+
+
+    dim = int(input("\n\nPlease Select the size of Maze (MIN: 11): "))
 
 
 
-if choice == 1:
-    start, end, maze = generateBacktracking(dim, dim)
+    if choice == 1:
+        start, end, maze = generateBacktracking(dim, dim)
 
-elif choice == 2:
-    start, end, maze, sideFlag = generateSidewinder(dim, dim)
+    elif choice == 2:
+        start, end, maze, sideFlag = generateSidewinder(dim, dim)
 
-elif choice == 3:
-    start, end, maze = generateRecursiveDiv(dim, dim)
+    elif choice == 3:
+        start, end, maze = generateRecursiveDiv(dim, dim)
 
-else:
-    exit("Thanks for Playing!")
-
-
-plt.title("Maze")
-plt.axis('off')
-plt.imshow(maze, interpolation='nearest')
-plt.show()
+    else:
+        exit("Thanks for Playing!")
 
 
-
-solChoice = input("\n\nWould you like to solve the maze through Astar Algorithm? (1. Yes): ")
-
-if solChoice == "1":
-    maze, path, weight = solAstar(maze,start, end)
-
-else:
-    exit("Thanks for Playing!")
+    plt.title("Maze")
+    plt.axis('off')
+    plt.imshow(maze, interpolation='nearest')
+    plt.show()
 
 
 
-plt.title("Solution with AStar")
-plt.imshow(maze, interpolation='nearest')
-plt.axis('off')
-plt.show()
+    solChoice = input("\n\nWould you like to solve the maze through Astar Algorithm? (1. Yes): ")
 
-weightChoice = input("\n\nWould you like to print weight of solution? (1. Yes): ")
+    if solChoice == "1":
+        maze, path, weight = solAstar(maze,start, end)
 
-if weightChoice == "1":
-    print("Each step is worth one unit, And Total weight of Solution =  {}".format(weight))
+    else:
+        exit("Thanks for Playing!")
 
 
+
+    plt.title("Solution with AStar")
+    plt.imshow(maze, interpolation='nearest')
+    plt.axis('off')
+    plt.show()
+
+    weightChoice = input("\n\nWould you like to print weight of solution? (1. Yes): ")
+
+    if weightChoice == "1":
+        print("Each step is worth one unit, And Total weight of Solution =  {}".format(weight))
+
+
+if __name__ == "__main__":
+    play_choice = True
+    print("-------------------------------------------------------------")
+    print("\tWelcome to maze generation and solving game!")
+    print("-------------------------------------------------------------")
+    while play_choice:
+        main()
+        play_in = input("\nDo you want to go again? (1. Yes): ")
+        if int(play_in) != 1:
+            play_choice = False
 
 
 
